@@ -10,7 +10,7 @@ const Header = () => {
             <a href="#">Liked</a>
           </li>
           <li>
-            <a href="#">Insert</a>
+            <a href="/insert">Insert</a>
           </li>
           <li>
             <a href="#">Login</a>
