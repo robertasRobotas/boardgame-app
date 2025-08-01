@@ -17,8 +17,8 @@ const ConfirmModal = ({ onCancel, onConfirm, title }: ConfirmModalProps) => {
         </button>
       </div>
       <div className={styles.btnWrapper}>
-        <button>cancel</button>
-        <button>delete</button>
+        <button onClick={onCancel}>cancel</button>
+        <button onClick={onConfirm}>delete</button>
       </div>
     </div>
   );

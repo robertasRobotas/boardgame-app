@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import DetailedGame from "@/components/DetailedGame/DetailedGame";
+import Template from "@/components/Template/Template";
+import { getGameById } from "../api/fetch";
 
 const GamePage = () => {
   const router = useRouter();
@@ -12,9 +14,7 @@ const GamePage = () => {
   const getDetailedGame = async (id: string) => {
     const jwt = Cookies.get("@user_jwt");
 
-    const response = await axios.get(`http://localhost:3005/games/${id}`, {
-      headers: { Authorization: jwt },
-    });
+    const response = await getGameById(id);
 
     setGame(response.data.game);
   };
@@ -23,12 +23,7 @@ const GamePage = () => {
     router.query.id && getDetailedGame(router.query.id as string);
   }, [router.query.id]);
 
-  return (
-    <div>
-      <Header />
-      {game && <DetailedGame game={game} />}
-    </div>
-  );
+  return <Template>{game && <DetailedGame game={game} />}</Template>;
 };
 
 export default GamePage;

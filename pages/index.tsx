@@ -1,10 +1,11 @@
 import Wrapper from "@/components/Card/Wrapper/Wrapper";
-import Header from "@/components/Header/Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Game } from "@/types/boardgame";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import Template from "@/components/Template/Template";
+import { getAllGames } from "./api/fetch";
 
 const MainPage = () => {
   const [games, setGames] = useState<Game[]>([]);
@@ -13,13 +14,7 @@ const MainPage = () => {
 
   const fetchGames = async () => {
     try {
-      const jwt = Cookies.get("@user_jwt");
-
-      const response = await axios.get("http://localhost:3005/games", {
-        headers: {
-          Authorization: jwt,
-        },
-      });
+      const response = await getAllGames();
       setGames(response.data.games);
     } catch (err) {
       if (err.status === 401) {
@@ -35,10 +30,9 @@ const MainPage = () => {
   }, []);
 
   return (
-    <>
-      <Header />
+    <Template>
       <Wrapper games={games} />
-    </>
+    </Template>
   );
 };
 

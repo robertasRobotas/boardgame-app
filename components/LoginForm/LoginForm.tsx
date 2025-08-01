@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styles from "./loginForm.module.css";
-import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { login } from "@/pages/api/fetch";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -20,10 +20,7 @@ const LoginForm = () => {
         password: password,
       };
 
-      const response = await axios.post(
-        "http://localhost:3005/users/login",
-        loginData
-      );
+      const response = await login(loginData);
 
       if (response.status === 200) {
         Cookies.set("@user_jwt", response.data.jwt);

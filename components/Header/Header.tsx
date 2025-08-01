@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./header.module.css";
 
 const Header = () => {
@@ -7,13 +8,13 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <a href="#">Liked</a>
+            <Link href="#">Liked</Link>
           </li>
           <li>
-            <a href="/insert">Insert</a>
+            <Link href="/insert">Insert</Link>
           </li>
           <li>
-            <a href="#">Login</a>
+            <Link href="/login">Login</Link>
           </li>
         </ul>
       </nav>

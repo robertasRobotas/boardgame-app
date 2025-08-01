@@ -1,14 +1,12 @@
-import Header from "@/components/Header/Header";
 import InsertForm from "@/components/InsertForm/InsertForm";
+import Template from "@/components/Template/Template";
 import React from "react";
 
 const InsertPage = () => {
   return (
-    <div>
-      <Header />
-
+    <Template>
       <InsertForm />
-    </div>
+    </Template>
   );
 };
 

@@ -5,6 +5,7 @@ import { generateRange } from "@/utils/range";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { insertGame } from "@/pages/api/fetch";
 
 const InsertForm = () => {
   const router = useRouter();
@@ -33,22 +34,20 @@ const InsertForm = () => {
         title: title,
         description: description,
         imgUrl: imgUrl,
-        releaseYear: releaseYear,
-        playTimeMin: playTimeMin,
-        bestStartPlayAtAge: bestStartPlayAtAge,
-        rating: rating,
-        dificulty: dificulty,
+        releaseYear: Number(releaseYear),
+        playTimeMin: Number(playTimeMin),
+        bestStartPlayAtAge: Number(bestStartPlayAtAge),
+        rating: Number(rating),
+        dificulty: Number(dificulty),
         boxSize: boxSize,
-        ratingCount: ratingCount,
+        ratingCount: Number(ratingCount),
         canPlayPersons: generateRange(canPlayPersons),
         bestPlayPersons: generateRange(bestPlayPersons),
       };
 
       const jwt = Cookies.get("@user_jwt");
 
-      const response = await axios.post("http://localhost:3005/games", game, {
-        headers: { Authorization: jwt },
-      });
+      const response = insertGame(game);
 
       console.log(response);
 

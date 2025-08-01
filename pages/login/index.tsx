@@ -1,16 +1,15 @@
-import Header from "@/components/Header/Header";
 import styles from "./loginPage.module.css";
 import LoginForm from "@/components/LoginForm/LoginForm";
+import Template from "@/components/Template/Template";
 
 const LoginPage = () => {
   return (
-    <>
-      <Header />
+    <Template>
       <div className={styles.main}>
         <h1 className={styles.title}>Boardgame App</h1>
         <LoginForm />
       </div>
-    </>
+    </Template>
   );
 };
 

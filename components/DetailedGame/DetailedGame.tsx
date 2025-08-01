@@ -2,15 +2,32 @@ import { Game } from "@/types/boardgame";
 import styles from "./detailedGame.module.css";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import { useState } from "react";
+import { deleteGameById } from "@/pages/api/fetch";
+import { toast, ToastContainer } from "react-toastify";
+import { useRouter } from "next/router";
 
 type DetailedGameProps = {
   game: Game;
 };
 
 const DetailedGame = ({ game }: DetailedGameProps) => {
+  const router = useRouter();
+
   const [isDeleteInitiated, setDeleteInitiated] = useState(false);
 
-  // delete the game, redirect user to the main page
+  const onDeleteGame = async (id: string) => {
+    try {
+      const response = await deleteGameById(id);
+
+      if (response.status === 200) {
+        toast("Game was deleted");
+
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
+      }
+    } catch (e) {}
+  };
 
   return (
     <>
@@ -32,9 +49,10 @@ const DetailedGame = ({ game }: DetailedGameProps) => {
         <ConfirmModal
           title="Do you really want to delete?"
           onCancel={() => setDeleteInitiated(false)}
-          onConfirm={() => console.log("confirm")}
+          onConfirm={() => onDeleteGame(game.id)}
         />
       )}
+      <ToastContainer />
     </>
   );
 };

@@ -14,3 +14,5 @@ export type Game = {
   bestPlayPersons: number[];
   cratedAt: Date;
 };
+
+export type GameInsert = Omit<Game, "id" | "cratedAt">;
