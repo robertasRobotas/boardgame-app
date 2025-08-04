@@ -11,7 +11,7 @@ const LoginForm = () => {
 
   const router = useRouter();
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
 

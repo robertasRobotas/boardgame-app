@@ -47,11 +47,11 @@ const InsertForm = () => {
 
       const jwt = Cookies.get("@user_jwt");
 
-      const response = insertGame(game);
+      const response = await insertGame(game);
 
       console.log(response);
 
-      if (response.status === 201) {
+      if (response && response.status === 201) {
         router.push("/");
       }
     } catch (err) {

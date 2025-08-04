@@ -2,7 +2,6 @@ import Wrapper from "@/components/Card/Wrapper/Wrapper";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Game } from "@/types/boardgame";
-import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Template from "@/components/Template/Template";
 import { getAllGames } from "./api/fetch";
@@ -17,7 +16,7 @@ const MainPage = () => {
       const response = await getAllGames();
       setGames(response.data.games);
     } catch (err) {
-      if (err.status === 401) {
+      if (axios.isAxiosError(err) && err.response?.status === 401) {
         router.push("/login");
       }
 
